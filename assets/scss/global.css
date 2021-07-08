@@ -1,0 +1,95 @@
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.w-large {
+  width: 300px;
+}
+
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex-center-x {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex-center-y {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.black-lighten {
+  background-color: #030303;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.absolute-t-r {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.fixed-t-r {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.z-high {
+  z-index: 100;
+}
+
+.z-higher {
+  z-index: 200;
+}
+
+.z-highest {
+  z-index: 1000;
+}
+
+.v-application--is-rtl .mr-4 {
+  margin-right: 0 !important;
+  margin-left: 16px;
+}
+/*# sourceMappingURL=global.css.map */

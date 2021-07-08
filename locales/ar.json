@@ -1,0 +1,10 @@
+{   
+    "message": "مرحبا", 
+    "login": {
+      "username": "الاسم",
+      "password": "كلمة المرور"
+    },
+    "form":{
+      "hide_none_required" : "اخفاء الحقول الغير مطلوبة"
+    }
+  }

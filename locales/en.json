@@ -1,0 +1,10 @@
+{   
+    "message": "Hello", 
+    "login": {
+      "username": "User Name",
+      "password": "Password"
+    },
+    "form":{
+      "hide_none_required" : "hide uneccessary fields"
+    }
+  }

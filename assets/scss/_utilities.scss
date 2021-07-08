@@ -1,0 +1,69 @@
+// widths & heights
+
+.w-full{
+    width: 100%;
+}
+.h-full{
+    height: 100%;
+}
+.w-screen{
+    width: 100vw;
+}
+.h-screen{
+    height: 100vh;
+}
+.w-large{
+    width: 300px;
+}
+
+
+
+
+// flex box
+.flex-center{
+    @include flex-center
+}
+.flex-center-x{
+    @include flex-center-x
+}
+.flex-center-y{
+    @include flex-center-y
+}
+
+
+// backgrounds & colors
+.black-lighten{
+    background-color: #030303;
+}
+
+// displays
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+
+.absolute-t-r{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.fixed{
+    position: fixed;
+}
+
+.fixed-t-r{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+.z-high{
+    z-index: 100;
+}
+.z-higher{
+    z-index: 200;
+}
+.z-highest{
+    z-index: 1000;
+}
