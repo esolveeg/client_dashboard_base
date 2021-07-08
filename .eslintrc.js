@@ -20,7 +20,13 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     "linebreak-style": "off",
+    "multiline-block-statements" : "no-error",
     "lines-between-class-members":"off",
+    "comma-dangle":"off",
+    "multiline-import-specifiers":"off",
+    "multiline-block-statements":"off",
+    "spaced-comment":"off",
+    "multiline-object-properties":"off",
     "comma-dangle": ["error", "never"]
   }
 }

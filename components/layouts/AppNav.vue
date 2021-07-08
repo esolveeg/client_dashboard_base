@@ -2,7 +2,7 @@
   <v-navigation-drawer
     v-model="drawer"
     :clipped="true"
-    right
+    :right="$vuetify.rtl"
     :mini-variant="true"
     fixed
     app

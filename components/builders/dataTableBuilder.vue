@@ -1,28 +1,26 @@
 <template>
   <v-card class=''>
     <v-data-table
-    :headers="opts.headers"
-    :items="datatable.items"
-    :options.sync="options"
-    :server-items-length="datatable.total"
-    :loading="loading"
-    sort-by="created_at"
-    class="elevation-1"
-  >
-    <template v-slot:top>
-      <div class="">
+      :headers="opts.headers"
+      :items="datatable.items"
+      :options.sync="options"
+      :server-items-length="datatable.total"
+      :loading="loading"
+      sort-by="created_at"
+      class="elevation-1"
+    >
+      <template v-slot:top>
+        <div class="">
 
-        <v-toolbar
-          flat
-        >
-          <v-toolbar-title>{{opts.title}}</v-toolbar-title>
-          <v-divider
-            class="mx-4"
-            inset
-            vertical
-          ></v-divider>
-          <v-spacer></v-spacer>
-          <v-btn
+          <v-toolbar flat>
+            <v-toolbar-title>{{$t(`table.${opts.title}`)}}</v-toolbar-title>
+            <v-divider
+              class="mx-4"
+              inset
+              vertical
+            ></v-divider>
+            <v-spacer></v-spacer>
+            <v-btn
               color="primary"
               dark
               class="mb-2 mr-2"
@@ -30,27 +28,38 @@
               :loading="opts.createLoading"
               @click.prevent="create"
             >
-            <v-icon >mdi-plus</v-icon>
-              New Item
-          </v-btn>
-          <slot name="actions"></slot>
-          <!-- <modals-products-create/> -->
-        </v-toolbar>
-      </div>
-      <div class="spacing-playground pa-6 mb-6">
-        <v-row>
-          <v-col cols="3" v-for="(fil, index) in opts.filters" :key="index">
-            <v-text-field v-model="form[fil.prop]" :clearable="fil.clearable" @keypress="isNumber($event)" @input="filter()" v-if="fil.type == 'number'" :label="fil.label" ></v-text-field>
-            <v-select
+              <v-icon>mdi-plus</v-icon>
+              {{$t('table.new_item')}}
+            </v-btn>
+            <slot name="actions"></slot>
+            <!-- <modals-products-create/> -->
+          </v-toolbar>
+        </div>
+        <div class="spacing-playground pa-6 mb-6">
+          <v-row>
+            <v-col
+              cols="3"
+              v-for="(fil, index) in opts.filters"
+              :key="index"
+            >
+              <v-text-field
+                v-model="form[fil.prop]"
+                :clearable="fil.clearable"
+                @keypress="isNumber($event)"
+                @input="filter()"
+                v-if="fil.type == 'number'"
+                :label="$t(`inputs.${fil.label}`)"
+              ></v-text-field>
+              <v-select
                 v-else-if="fil.type == 'select'"
                 :items="fil.items"
                 v-model="form[fil.prop]"
                 :clearable="fil.clearable"
                 :item-text="fil.itemText"
                 :item-value="fil.itemValue"
-                :label="fil.label"
-            ></v-select>
-             <v-menu
+                :label="$t(`inputs.${fil.label}`)"
+              ></v-select>
+              <v-menu
                 v-else-if="fil.type == 'date'"
                 :ref="fil.ref"
                 clearable
@@ -81,39 +90,64 @@
                 </v-date-picker>
               </v-menu>
               <!-- <builders-filter :filter="filter"/> -->
-          </v-col>
-          <v-col cols="8">
-            <v-text-field
+            </v-col>
+            <v-col cols="8">
+              <v-text-field
                 v-model="form.search"
                 append-icon="mdi-magnify"
                 label="Search"
                 single-line
                 hide-details
               >
-            </v-text-field>
-          </v-col>
-          <v-col cols="4">
-            <v-btn color="primary" v-if="opts.rememberAble != false" class="capitalize w-full" @click.prevent="saveFilters()">
-              remember my choices
-            </v-btn>
-          </v-col>
-        </v-row>
+              </v-text-field>
+            </v-col>
+            <v-col cols="4">
+              <v-btn
+                color="primary"
+                v-if="opts.rememberAble != false"
+                class="capitalize w-full"
+                @click.prevent="saveFilters()"
+              >
+                {{$t(`table.remember_my_choices`)}}
+              </v-btn>
+            </v-col>
+          </v-row>
 
-      </div>
+        </div>
 
-    </template>
-    <template v-slot:[`item.thumbnail`]="{ item }">
-      <v-img v-if="item.thumbnail == '' && item.thumbnail !== 'no-image'" src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg" class="dt-image"/>
-      <v-img v-else :src="item.thumbnail" class="dt-image"/>
-    </template>
-    <template v-slot:[`item.image`]="{ item }">
-      <v-img v-if="item.image == '' && item.image == 'no-image'" src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg" class="dt-image"/>
-      <v-img v-else :src="item.image" class="dt-image"/>
-    </template>
-    <template v-slot:[`item.qty`]="{ item }">
-      <!-- <td v-if="!$slots.qty">{{item.qty}}</td> -->
-      <span v-show="edit !== item.id" @dblclick="editQty(item.id , item.qty)" class="pointer">{{item.qty}}</span>
-      <v-text-field
+      </template>
+      <template v-slot:[`item.thumbnail`]="{ item }">
+        <v-img
+          v-if="item.thumbnail == '' && item.thumbnail !== 'no-image'"
+          src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg"
+          class="dt-image"
+        />
+        <v-img
+          v-else
+          :src="item.thumbnail"
+          class="dt-image"
+        />
+      </template>
+      <template v-slot:[`item.image`]="{ item }">
+        <v-img
+          v-if="item.image == '' && item.image == 'no-image'"
+          src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg"
+          class="dt-image"
+        />
+        <v-img
+          v-else
+          :src="item.image"
+          class="dt-image"
+        />
+      </template>
+      <template v-slot:[`item.qty`]="{ item }">
+        <!-- <td v-if="!$slots.qty">{{item.qty}}</td> -->
+        <span
+          v-show="edit !== item.id"
+          @dblclick="editQty(item.id , item.qty)"
+          class="pointer"
+        >{{item.qty}}</span>
+        <v-text-field
           v-show="edit == item.id"
           :ref="`qty-${item.id}`"
           :loading="qtyLoading"
@@ -124,54 +158,66 @@
           dark
           solo
         ></v-text-field>
-    </template>
-    <template v-slot:[`item.actions`]="{ item }">
-      
-        <v-btn v-if="opts.editable !== false && (typeof item.closed_at == 'undefined' || item.closed_at == null)" @click="editItem(item)" color="primary" class="mr-4">
+      </template>
+      <template v-slot:[`item.actions`]="{ item }">
+
+        <v-btn
+          v-if="opts.editable !== false && (typeof item.closed_at == 'undefined' || item.closed_at == null)"
+          @click="editItem(item)"
+          color="primary"
+          class="mr-4"
+        >
           <v-icon
             small
             class="mr-2"
-            
           >
             mdi-pencil
           </v-icon>
-          Edit
+          {{$t('table.edit')}}
 
         </v-btn>
-        <v-btn v-if="opts.deleteble !== false  && (typeof item.closed_at == 'undefined' || item.closed_at == null)" @click="deleteItem(item)" color="danger" class="mr-4 mb-0">
-          <v-icon
-            small
-          >
+        <v-btn
+          v-if="opts.deleteble !== false  && (typeof item.closed_at == 'undefined' || item.closed_at == null)"
+          @click="deleteItem(item)"
+          color="danger"
+          class="mr-4 mb-0"
+        >
+          <v-icon small>
             mdi-delete
           </v-icon>
         </v-btn>
-           <v-btn v-if="opts.viewable" @click="viewItem(item)"  class="mr-4 mb-0">
-              <v-icon
-                small
-                class="mr-2"
-              >
-                mdi-eye
-              </v-icon>
-              View
-            </v-btn>
-        <slot name="itemActions" :item="item"></slot>
+        <v-btn
+          v-if="opts.viewable"
+          @click="viewItem(item)"
+          class="mr-4 mb-0"
+        >
+          <v-icon
+            small
+            class="mr-2"
+          >
+            mdi-eye
+          </v-icon>
+          {{$t('table.view')}}
+        </v-btn>
+        <slot
+          name="itemActions"
+          :item="item"
+        ></slot>
 
-      
-    </template>
-    <template v-slot:no-data>
-      <span>No data found</span>
-    </template>
-  </v-data-table>
-  <modals-global-delete @deleted="getData"/>
-         <modals-global-create-doc/>
+      </template>
+      <template v-slot:no-data>
+        <span>{{$t('table.no_data')}}</span>
+      </template>
+    </v-data-table>
+    <modals-global-delete @deleted="getData" />
 
-  <slot name="modals"></slot>
+    <slot name="modals"></slot>
 
   </v-card>
 </template>
 <script>
-import datatable from "@/mixins/builders/datatable.js"
-  export default {
-    mixins : [datatable],
-  }
+import datatable from '@/mixins/builders/datatable.js'
+export default {
+  mixins: [datatable]
+}
 </script>

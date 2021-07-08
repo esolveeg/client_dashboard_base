@@ -1,10 +1,14 @@
 export default [
     {
-        icon: 'mdi-apps',
+        icon: 'mdi-database-lock-outline',
         to: `/`
     },
     {
-        icon: 'mdi-chart-bubble',
-        to: `/test`
+        icon: 'mdi-cart-arrow-up',
+        to: `/orders`
+    },
+    {
+        icon: 'mdi-lock-open-outline',
+        to: `/login`
     }
 ]
