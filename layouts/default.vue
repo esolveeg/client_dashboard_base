@@ -1,14 +1,17 @@
 <template>
-  <v-app dark class="relative">
+  <v-app
+    dark
+    class="relative"
+  >
     <layouts-app-loader v-show=" isLoading" />
-    <layouts-app-nav   v-show=" !isLoading" />
-    <layouts-app-bar   v-show=" !isLoading" />
-    <v-main v-show=" !isLoading" >  
+    <layouts-app-nav v-show=" !isLoading" />
+    <!-- <layouts-app-bar   v-show=" !isLoading" /> -->
+    <v-main v-show=" !isLoading">
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <layouts-app-footer   v-show=" !isLoading" />
+    <layouts-app-footer v-show=" !isLoading" />
   </v-app>
 </template>
 
@@ -18,12 +21,11 @@ import { initApp } from '@/utils/helpers/Global.js'
 export default {
   computed: {
     ...mapGetters({
-      isLoading: 'ui/isLoading',
-    }),
-  },
-  created() {
-    initApp(this).then(() => {
+      isLoading: 'ui/isLoading'
     })
   },
+  created() {
+    initApp(this).then(() => {})
+  }
 }
 </script>
