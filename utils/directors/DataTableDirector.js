@@ -7,13 +7,13 @@ export default class DatatableDirector {
     makeProducts() {
 
         const headers = [
-            { text: 'code', value: 'code', align: "center" },
-            { text: 'name', value: 'name', align: "center" },
-            { text: 'qty', value: 'qty', align: "center" },
-            { text: 'price', value: 'price', align: "center" },
-            { text: 'price_range', value: 'price_range', align: "center" },
-            { text: 'note', value: 'note', align: "center" },
-            { text: 'actions', value: 'actions', align: "center" }
+            { text: 'columns.code', value: 'code', align: "center" },
+            { text: 'columns.name', value: 'name', align: "center" },
+            { text: 'columns.qty', value: 'qty', align: "center" },
+            { text: 'columns.price', value: 'price', align: "center" },
+            { text: 'columns.price_range', value: 'price_range', align: "center" },
+            { text: 'columns.note', value: 'note', align: "center" },
+            { text: 'columns.actions', value: 'actions', align: "center" }
         ]
         return this.builder
             .setTitle('products')
@@ -29,10 +29,10 @@ export default class DatatableDirector {
     makeOrders() {
 
         const headers = [
-            { text: 'code', value: 'code', align: "center" },
-            { text: 'employee', value: 'employee', align: "center" },
-            { text: 'total', value: 'total', align: "center" },
-            { text: 'created_at', value: 'created_at', align: "center" }
+            { text: 'columns.code', value: 'code', align: "center" },
+            { text: 'columns.employee', value: 'employee', align: "center" },
+            { text: 'columns.total', value: 'total', align: "center" },
+            { text: 'columns.created_at', value: 'created_at', align: "center" }
         ]
         return this.builder
             .setTitle('orders')

@@ -92,7 +92,6 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     rtl : true,
-    customVariables: ['~/assets/scss/variables.scss'],
     theme: {
       dark: false,
       themes: {

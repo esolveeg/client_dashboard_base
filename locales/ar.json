@@ -1,10 +1,32 @@
-{   
-    "message": "مرحبا", 
-    "login": {
-      "username": "الاسم",
-      "password": "كلمة المرور"
-    },
-    "form":{
-      "hide_none_required" : "اخفاء الحقول الغير مطلوبة"
-    }
+{
+  "message": "مرحبا",
+  "login": {
+    "username": "الاسم",
+    "password": "كلمة المرور"
+  },
+  "table": {
+    "products": "المنتجات",
+    "no_data": "لايوجد بيانات",
+    "orders": "الطلبات"
+  },
+  "sidebar": {
+    "products": "المنتجات",
+    "orders": "الطلبات",
+    "login": "تسجيل الدخول"
+  },
+  "form": {
+    "hide_none_required": "اخفاء الحقول الغير مطلوبة"
+  },
+  "columns": {
+    "code": "الكود",
+    "employee": "الموظف",
+    "totla": "الاجمالي",
+    "created_at": "التاريخ",
+    "name": "الاسم",
+    "price": "السعر",
+    "price_range": "نطاق الاسعار",
+    "note": "ملاحظة",
+    "actions": "الاجرائات",
+    "qty": "الكمية"
   }
+}

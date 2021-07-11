@@ -1,6 +1,7 @@
 
 <template>
   <v-row>
+    <!-- <layouts-page-header :title="'pages.products'"/> -->
     <v-col class="text-center">
       <builders-data-table-builder :opts="opts" />
     </v-col>
@@ -13,7 +14,10 @@ import DatatableDirector from '@/utils/directors/DataTableDirector.js'
 
 export default {
   data() {
-    const opts = new DatatableDirector(new DatatableBuilder()).makeProducts()
+    const opts = new DatatableDirector(
+      new DatatableBuilder(),
+      this.$t()
+    ).makeProducts()
     // // const opts = new DatatableDirector(DatatableBuilder()).makeDocuments()
 
     return {

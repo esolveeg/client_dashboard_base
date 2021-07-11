@@ -24,9 +24,8 @@ module.exports = {
     "lines-between-class-members":"off",
     "comma-dangle":"off",
     "multiline-import-specifiers":"off",
-    "multiline-block-statements":"off",
     "spaced-comment":"off",
-    "multiline-object-properties":"off",
+    "multiline-object-properties":"no-error",
     "comma-dangle": ["error", "never"]
   }
 }
