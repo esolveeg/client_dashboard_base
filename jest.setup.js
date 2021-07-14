@@ -1,49 +1,16 @@
-import { Nuxt, Builder } from "nuxt"
-import nuxtConfig from "./nuxt.config"
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import { config } from '@vue/test-utils'
+// import VueI18n from 'vue-i18n'
+// import i18n from '~/config/i18n'
+// Vue.config.silent = true
+Vue.use(Vuetify)
 
-const resetConfig = {
-  loading: false,
-  loadingIndicator: false,
-  fetch: {
-    client: false,
-    server: false
-  },
-  features: {
-    store: true,
-    layouts: false,
-    meta: false,
-    middleware: false,
-    transitions: false,
-    deprecations: false,
-    validate: false,
-    asyncData: false,
-    fetch: false,
-    clientOnline: false,
-    clientPrefetch: false,
-    clientUseUrl: false,
-    componentAliases: false,
-    componentClientOnly: false
-  },
-  build: {
-    indicator: false,
-    terser: false
-  }
-}
-
-const config = Object.assign({}, nuxtConfig, resetConfig, {
-  mode: "spa",
-  srcDir: nuxtConfig.srcDir,
-  ignore: ["**/components/**/*", "**/layouts/**/*", "**/pages/**/*"]
-})
-
-const buildNuxt = async () => {
-  const nuxt = new Nuxt(config)
-  await new Builder(nuxt).build()
-  return nuxt
-}
-
-module.exports = async () => {
-  const nuxt = await buildNuxt()
-
-  process.env.buildDir = nuxt.options.buildDir
-}
+Vue.prototype.$t = function (key) {
+    return 'asd';
+  };
+Vue.config.ignoredElements = ['router-link']
+// Mock Nuxt components
+config.stubs.nuxt = { template: '<div />' }
+config.stubs['nuxt-link'] = { template: '<a><slot /></a>' }
+config.stubs['no-ssr'] = { template: '<span><slot /></span>' }

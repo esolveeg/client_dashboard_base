@@ -1,13 +1,16 @@
 import colors from 'vuetify/es5/util/colors'
 import i18n from './config/i18n'
-import config from './config'
+import ar from 'vuetify/lib/locale/ar'
+import en from 'vuetify/lib/locale/en'
+// import config from './config'
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
 
   env :{
-    config
+    apiUrl:"http://localhost:8585/api/",
+    storeCode:1,
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -42,8 +45,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     
@@ -92,6 +94,10 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     rtl : true,
+    lang: {
+      locales: { ar, en },
+      current: 'ar',
+    },
     theme: {
       dark: false,
       themes: {

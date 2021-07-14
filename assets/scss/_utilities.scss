@@ -107,4 +107,8 @@
     width: 100%;
     height: 185px;
     background: var(--main-gredient) !important;
+    @media (max-width:960) {
+        top:var(--md-app-bar-h) !important;
+
+    }
 }

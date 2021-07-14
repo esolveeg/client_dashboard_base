@@ -3,7 +3,9 @@
   <v-row>
     <!-- <layouts-page-header :title="'pages.products'"/> -->
     <v-col class="text-center">
-      <builders-data-table-builder :opts="opts" />
+      <builders-data-table-builder :opts="opts">
+        <!-- <template v-slot:default="slotProps">{{slotProps.item}}</template> -->
+      </builders-data-table-builder>
     </v-col>
   </v-row>
 </template>
@@ -16,7 +18,7 @@ export default {
   data() {
     const opts = new DatatableDirector(
       new DatatableBuilder(),
-      this.$t()
+      this
     ).makeProducts()
     // // const opts = new DatatableDirector(DatatableBuilder()).makeDocuments()
 

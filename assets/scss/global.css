@@ -6,6 +6,7 @@
   --sidebar-variant-with:60px;
   --primary-transition:all .3s ease-out;
   --app-bar-h:64px;
+  --md-app-bar-h:56px;
 }
 
 .w-full {
@@ -142,6 +143,12 @@
   background: var(--main-gredient) !important;
 }
 
+@media (max-width: 960) {
+  .breadcrumbs {
+    top: var(--md-app-bar-h) !important;
+  }
+}
+
 .v-list-item--active {
   background: var(--main-gredient) !important;
   color: #fff !important;
@@ -159,6 +166,29 @@
 .v-sheet.v-app-bar.v-toolbar:not(.v-sheet--outlined) {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
+}
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td {
+  max-width: 200px !important;
+}
+
+.v-data-footer {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.v-data-footer__select {
+  display: none !important;
+}
+
+@font-face {
+  font-family: "kufi";
+  src: local("kufi"), url(~assets/fonts/Kufi-Regular.ttf) format("truetype");
+}
+
+.v-application--is-rtl {
+  font-family: "Kufi" !important;
 }
 
 .v-application--is-rtl .mr-4 {

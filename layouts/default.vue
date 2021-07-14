@@ -11,7 +11,7 @@
         <Nuxt />
       </v-container>
     </v-main>
-    <layouts-app-footer v-show=" !isLoading" />
+    <!-- <layouts-app-footer v-show=" !isLoading" /> -->
   </v-app>
 </template>
 

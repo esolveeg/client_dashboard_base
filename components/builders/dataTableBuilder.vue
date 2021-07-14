@@ -3,11 +3,14 @@
     <v-data-table
       :headers="opts.headers"
       :items="datatable.items"
-      :options.sync="options"
-      :server-items-length="datatable.total"
       :loading="loading"
-      sort-by="created_at"
+      :items-per-page="100"
+      :search="search"
+      fixed-header
+      height="600px"
+      sort-by="Name"
       class="elevation-1"
+     
     >
       <template v-slot:top>
         <div class="">
@@ -20,17 +23,6 @@
               vertical
             ></v-divider>
             <v-spacer></v-spacer>
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2 mr-2"
-              v-if="opts.createable !== false"
-              :loading="opts.createLoading"
-              @click.prevent="create"
-            >
-              <v-icon>mdi-plus</v-icon>
-              {{$t('table.new_item')}}
-            </v-btn>
             <slot name="actions"></slot>
             <!-- <modals-products-create/> -->
           </v-toolbar>
@@ -93,15 +85,18 @@
             </v-col>
             <v-col cols="8">
               <v-text-field
-                v-model="form.search"
+                v-model="search"
                 append-icon="mdi-magnify"
-                label="Search"
+                :label="$t('inputs.search')"
                 single-line
                 hide-details
               >
               </v-text-field>
             </v-col>
-            <v-col cols="4">
+            <v-col
+              cols="4"
+              v-if="typeof opts.filters != 'undefined' && opts.filters.length > 0"
+            >
               <v-btn
                 color="primary"
                 v-if="opts.rememberAble != false"
@@ -116,49 +111,59 @@
         </div>
 
       </template>
-      <template v-slot:[`item.thumbnail`]="{ item }">
-        <v-img
-          v-if="item.thumbnail == '' && item.thumbnail !== 'no-image'"
-          src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg"
-          class="dt-image"
-        />
-        <v-img
+      <template v-slot:[`item.LimitedQnt`]="{ item }">
+        <v-chip
+          class="ma-2"
+          color="red"
+          label
+          text-color="white"
+          v-if="item.LimitedQnt"
+        >
+          <v-icon left>
+            mdi-lock-alert-outline
+          </v-icon>
+          {{$t('table.limited')}}
+        </v-chip>
+        <v-chip
+          class="ma-2"
+          color="green"
+          label
+          text-color="white"
           v-else
-          :src="item.thumbnail"
-          class="dt-image"
-        />
+        >
+          <v-icon left>
+            mdi-lock-open-variant-outline
+          </v-icon>
+          {{$t('table.not_limited')}}
+        </v-chip>
       </template>
-      <template v-slot:[`item.image`]="{ item }">
-        <v-img
-          v-if="item.image == '' && item.image == 'no-image'"
-          src="https://res.cloudinary.com/dwfcmvqn5/image/upload/v1550827381/no-img.jpg"
-          class="dt-image"
-        />
-        <v-img
+      <template v-slot:[`item.StopSale`]="{ item }">
+        <v-chip
+          class="ma-2"
+          color="red"
+          label
+          text-color="white"
+          v-if="item.StopSale"
+        >
+          <v-icon left>
+            mdi-lock-alert-outline
+          </v-icon>
+          {{$t('table.stop_sale')}}
+        </v-chip>
+        <v-chip
+          class="ma-2"
+          color="green"
+          label
+          text-color="white"
           v-else
-          :src="item.image"
-          class="dt-image"
-        />
+        >
+          <v-icon left>
+            mdi-lock-open-variant-outline
+          </v-icon>
+          {{$t('table.not_stop_sale')}}
+        </v-chip>
       </template>
-      <template v-slot:[`item.qty`]="{ item }">
-        <!-- <td v-if="!$slots.qty">{{item.qty}}</td> -->
-        <span
-          v-show="edit !== item.id"
-          @dblclick="editQty(item.id , item.qty)"
-          class="pointer"
-        >{{item.qty}}</span>
-        <v-text-field
-          v-show="edit == item.id"
-          :ref="`qty-${item.id}`"
-          :loading="qtyLoading"
-          v-model="qty"
-          @keyup.enter="updateQty(item.id)"
-          label="Quanitity"
-          class="dt-input"
-          dark
-          solo
-        ></v-text-field>
-      </template>
+
       <template v-slot:[`item.actions`]="{ item }">
 
         <v-btn
@@ -175,16 +180,6 @@
           </v-icon>
           {{$t('table.edit')}}
 
-        </v-btn>
-        <v-btn
-          v-if="opts.deleteble !== false  && (typeof item.closed_at == 'undefined' || item.closed_at == null)"
-          @click="deleteItem(item)"
-          color="danger"
-          class="mr-4 mb-0"
-        >
-          <v-icon small>
-            mdi-delete
-          </v-icon>
         </v-btn>
         <v-btn
           v-if="opts.viewable"

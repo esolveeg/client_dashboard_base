@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = axios.create ({
-    baseURL: `${process.env.API_URL}`,
+    baseURL: `${process.env.apiUrl}`,
     headers: { 'Accept': 'application/json' , 'X-Requested-With':'XMLHttpRequest'}
 })
 

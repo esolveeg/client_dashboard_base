@@ -62,7 +62,7 @@
         @click.prevent="switchTheme"
       >mdi-weather-night</v-icon>
     </v-app-bar>
-    <div class="breadcrumbs"></div>
+    <!-- <div class="breadcrumbs"></div> -->
   </div>
 </template>
 

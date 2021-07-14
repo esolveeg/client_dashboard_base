@@ -1,6 +1,7 @@
 export const switchLanguage = (locale, ctx) => {
   localStorage.setItem('locale', locale)
   ctx.$vuetify.rtl = locale === 'ar'
+  ctx.$vuetify.lang.current = locale
   ctx.$i18n.setLocale(locale)
 }
 

@@ -6,8 +6,11 @@ export default {
         // extract document id from query parameter
         return {
             datatable: {},
-            form: {},
-            search: {},
+            form: {
+                StoreCode:1
+            },
+            apiUrl:process.env,
+            search: "",
             loading: false,
             options: {}
         }
@@ -17,7 +20,7 @@ export default {
             this.loading = true
             http.get(`${this.opts.url}?${serializeQuery(clearNullValues(this.form))}`)
                 .then(res => {
-                    this.datatable = res.data
+                    this.datatable.items = res.data
                     this.loading = false
                     //  console.log(res.data[0].keys)
                 })
@@ -73,26 +76,6 @@ export default {
         }
 
     },
-    watch: {
-        options: {
-            handler() {
-                //  this.form.show = this.options.itemsPerPage
-                //  this.form.page = this.options.page
-
-                Object.keys(this.$route.params).forEach(key => {
-                    this.form[key] = this.$route.params[key]
-                })
-                this.filter()
-            },
-            deep: true,
-        },
-        form: {
-            handler() {
-                this.filter()
-            },
-            deep: true,
-        },
-    },
     created() {
         // set opt.doctype to the document type from do param
         if (this.$route.params.type) {
@@ -120,6 +103,8 @@ export default {
             this.form = query
         }
         this.initFilters()
+        this.form.search = ''
+        this.getData()
     },
 
 }

@@ -41,7 +41,7 @@
                 :type="input.inputType"
                 :rules="typeof input.rules == 'undefined' ? [] : input.rules"
                 :hint="input.hint"
-                :label="`form.${input.label}`"
+                :label="`inputs.${input.label}`"
                 @keyup.enter="enter(input)"
               ></v-text-field>
               <slot
@@ -63,7 +63,7 @@
                 :loading="input.loading"
                 :item-text="input.inputText"
                 :item-value="input.inputValue"
-                :label="`form.${input.label}`"
+                :label="`inputs.${input.label}`"
               ></v-select>
             </div>
             <div
@@ -72,7 +72,7 @@
             >
               <v-textarea
                 v-model="form[input.prop]"
-                :label="`form.${input.label}`"
+                :label="`inputs.${input.label}`"
                 :rules="typeof input.rules == 'undefined' ? [] : input.rules"
                 :error="opts.errors.hasOwnProperty(input.prop)"
                 :error-messages="opts.errors[input.prop]"
@@ -95,7 +95,7 @@
                 :item-text="input.inputText"
                 :item-value="input.inputValue"
                 :return-object="false"
-                :label="`form.${input.label}`"
+                :label="`inputs.${input.label}`"
               ></v-combobox>
               <!-- <v-icon @click.prevent="createAuthor" >mdi-plus</v-icon> -->
             </div>
@@ -105,7 +105,7 @@
             >
               <v-switch
                 v-model="form[input.prop]"
-                :label="`form.${input.label}`"
+                :label="`inputs.${input.label}`"
               ></v-switch>
             </div>
             <div
